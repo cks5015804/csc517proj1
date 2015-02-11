@@ -3,9 +3,9 @@
 one:
   email: MyString
   password: MyString
-  type: 
+  role:
 
 two:
   email: MyString
   password: MyString
-  type: 
+  role:
