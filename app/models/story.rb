@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
                     'Dev Complete' => 4, 'In Test' => 5, 'Complete' => 6}
 
   # a story can belong to only 1 project
-  belongs_to :project
+  belongs_to :project, :class_name => "Project", :foreign_key => "project_id"
 
   # a story can have 0~2 users working on them
   has_many :users, dependent: :nullify
