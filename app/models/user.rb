@@ -9,4 +9,13 @@ class User < ActiveRecord::Base
   validates :password, :presence => true
   validates :role, :presence => true
 
+  def authenticate(email, password)
+    if user = User.find_by_email(email)
+        if user.password == password
+          return user
+      end
+    end
+    return nil
+  end
+
 end
