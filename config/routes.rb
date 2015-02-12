@@ -1,29 +1,30 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
-  resources :models
 
   resources :projects
-
+  resources :stories
   resources :users
-
   resources :sessions
 
   Rails.application.routes.draw do
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
-    #get    'sign_story'    => 'stories#sign'
+    get    'password_change' => 'sessions#password'
+    post    'password_change' => 'sessions#password_change'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :stories
+  get 'sessions/new'
+
+  get 'stories/:id/sign' => 'stories#sign', as: :sign_story
+  get 'projects/:id/sign' => 'projects#show_sign', as: :show_sign_project
+  post 'project/sign' => 'projects#sign', as: :sign_project
+
+
 
   # You can have the root of your site routed with "root"
-   root 'stories#index'
-
-  get 'stories/:id/sign' => 'story#sign', as: :sign_story
+   root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

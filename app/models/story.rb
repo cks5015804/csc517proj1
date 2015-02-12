@@ -4,10 +4,10 @@ class Story < ActiveRecord::Base
                     'Dev Complete' => 4, 'In Test' => 5, 'Complete' => 6}
 
   # a story can belong to only 1 project
-  belongs_to :project, :class_name => "Project", :foreign_key => "project_id"
+  belongs_to :project, inverse_of: :stories, :class_name => "Project", :foreign_key => "project_id"
 
   # a story can have 0~2 users working on them
-  has_many :users, dependent: :nullify
+  has_many :users, inverse_of: :story, dependent: :nullify
 
   validates :title, :presence => true
   validates :description, :presence => true

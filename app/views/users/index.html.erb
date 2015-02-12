@@ -5,6 +5,8 @@
   <thead>
     <tr>
       <th>User e-mail</th>
+      <th colspan="4">Actions</th>
+      <th align="center">Assigned Project</th>
     </tr>
   </thead>
 
@@ -15,6 +17,16 @@
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <td><%= link_to 'Assign Project', show_sign_project_path(user) %></td>
+
+        <td align="center"><% if(user.project_id.nil? == false)
+                 concat Project.find(user.project_id).title
+               else
+                 concat 'N/A'
+               end
+        %></td>
+
       </tr>
     <% end %>
   </tbody>

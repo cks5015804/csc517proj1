@@ -5,13 +5,17 @@ module SessionsHelper
     session[:user_role] = user.role
   end
 
-  # returns currently logged in user
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
   def logged_in?
     !current_user.nil?
+  end
+
+  def admin?
+    current_user.role.downcase == 'admin'
   end
 
   def log_out

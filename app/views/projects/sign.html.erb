@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<h1>Signing user '<%=@user.email %>' for project</h1>
+
+
+<%= form_for(:project, url: sign_project_path) do |f| %>
+    <div class="field">
+      <label>Choose a project:</label>
+
+      <select name="project_id">
+        <%= Project.all.each do |p| %>
+            <option value="<%= p.id %>"><%= p.title %></option>
+        <% end %>
+      </select>
+
+      <input type="hidden" name="user_id" value="<%= @user.id %>" >
+
+      <%= f.submit 'Sign' %>
+
+    </div>
+<% end %>
+
+

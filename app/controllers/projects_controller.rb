@@ -61,6 +61,27 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def show_sign
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :sign }
+      format.json { head :no_content }
+    end
+  end
+
+  def sign
+    @project = Project.find(params[:project_id])
+    @user = User.find(params[:user_id])
+
+    @user.update_attributes!(:project_id => @project.id)
+
+    respond_to do |format|
+      format.html { redirect_to users_path, notice: 'Project was successfully signed for user.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

@@ -1,4 +1,6 @@
 class StoriesController < ApplicationController
+  include SessionsHelper
+
   # GET /stories
   # GET /stories.json
   def index
@@ -85,10 +87,17 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @user = current_user
 
-    @story.users = @user
+    @user.update_attributes!(:story_id => @story.id)
+
+    respond_to do |format|
+      format.html { redirect_to stories_path, notice: 'Story was successfully signed or switched.' }
+      format.json { head :no_content }
+    end
   end
 
   def story_params
     params.require(:story).permit(:title, :description, :pointVal, :stage)
   end
+
+
 end

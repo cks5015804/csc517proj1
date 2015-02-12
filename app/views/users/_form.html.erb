@@ -21,7 +21,7 @@
       <%= f.text_field :password %><br />
 
       <%= f.label :role %>
-      <%= f.text_field :role %><br />
+      <%= f.select( :role, User::USER_ROLES, {prompt: 'Select a role'}) %><br><br>
     </div>
 
     <div class="actions">

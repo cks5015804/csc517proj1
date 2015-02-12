@@ -14,8 +14,8 @@
     <td><%= story.title %></td>
     <td><%= link_to 'Show', story_path(story) %></td>
     <td><%= link_to 'Edit', edit_story_path(story) %></td>
-    <td><%= link_to 'Sign up', sign_story(story) %></td>
     <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Sign up', sign_story_path(story) %></td>
   </tr>
 <% end %>
 </table>
