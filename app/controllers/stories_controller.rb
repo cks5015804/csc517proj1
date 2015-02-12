@@ -81,6 +81,13 @@ class StoriesController < ApplicationController
     end
   end
 
+  def sign
+    @story = Story.find(params[:id])
+    @user = current_user
+
+    @story.users = @user
+  end
+
   def story_params
     params.require(:story).permit(:title, :description, :pointVal, :stage)
   end
