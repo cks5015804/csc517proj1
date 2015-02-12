@@ -22,7 +22,10 @@
     <%= f.text_field :pointVal %><br />
 
     <%= f.label :stage %>
-    <%= f.text_field :stage %><br />
+    <%= f.select('stage', Story::STAGE_OPTIONS , {prompt: 'Select a stage'}) %>
+
+
+
   </div>
   <div class="actions">
     <%= f.submit %>
