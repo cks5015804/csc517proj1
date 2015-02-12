@@ -3,7 +3,25 @@
   <b>Title:</b>
   <%= @project.title %><br><br>
   <b>Description:</b><br>
-  <%= @project.description %>
+  <%= @project.description %><br><br>
+
+  <b>Stories:</b><br>
+  <% if @stories and @stories.size > 0 %>
+      <% @stories.each do |story| %>
+          <tr>
+            <td><%= story.title %></td>
+            <td><%= link_to 'Show', project %></td>
+
+            <% if logged_in? and admin? %>
+                <td><%= link_to 'Edit', edit_project_path(project) %></td>
+                <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+
+          </tr>
+      <% end %>
+  <% else %>
+      <tr><td>None</td></tr>
+  <% end %>
 
 </p>
 <%= link_to 'Edit', edit_project_path(@project) %> |

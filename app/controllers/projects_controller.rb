@@ -1,15 +1,28 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
+  include SessionsHelper
+
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if logged_in? and admin?
+      @projects = Project.all
+    elsif logged_in?
+      @user = current_user
+      if @user.project_id
+        @projects = Project.find([@user.project_id, @user.project_id])
+      end
+    else
+      @projects = []
+    end
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project = Project.find(params[:id])
+    @stories = Story.where("project_id == '#{@project.id}'")
   end
 
   # GET /projects/new

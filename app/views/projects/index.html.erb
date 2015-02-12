@@ -9,17 +9,28 @@
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+      <% if @projects and @projects.size > 0 %>
+        <% @projects.each do |project| %>
+          <tr>
+            <td><%= project.title %></td>
+            <td><%= link_to 'Show', project %></td>
+
+            <% if logged_in? and admin? %>
+                <td><%= link_to 'Edit', edit_project_path(project) %></td>
+                <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+
+          </tr>
+        <% end %>
+      <% else %>
+        <tr><td>None</td></tr>
+      <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<% if logged_in? and admin? %>
+    <%= link_to 'New Project', new_project_path %>
+<% end %>
+
