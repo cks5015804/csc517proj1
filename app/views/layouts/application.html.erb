@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Csc517proj1</title>
+  <title>StoryBoard</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <% if logged_in? %>
+    <%= 'Logged in as '+ current_user.email %>
+    <%= link_to 'Change Password',password_change_path %>
     <%= link_to 'Logout',logout_path, method: :delete %>
 <% else %>
     <%= link_to 'Log-in', login_path %>
@@ -21,7 +23,9 @@
 <br><br>
 
 <% if logged_in? %>
-    <%= link_to 'Users', users_path %>
+    <% if admin? %>
+        <%= link_to 'Users', users_path %>
+    <% end %>
     <%= link_to 'Projects', projects_path %>
     <%= link_to 'Stories', stories_path %>
 <% end %>

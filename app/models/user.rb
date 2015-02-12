@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  USER_ROLES = %w[Admin Dev]
+
   # users can only belong to one project at a time
   # users can only be signed up for one story at a time
   belongs_to :project, :class_name => "Project", :foreign_key => "project_id"

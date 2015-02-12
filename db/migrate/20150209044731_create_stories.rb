@@ -7,6 +7,7 @@ class CreateStories < ActiveRecord::Migration
       t.string :stage
 
       t.timestamps
+
     end
   end
 end

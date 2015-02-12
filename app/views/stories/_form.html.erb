@@ -19,7 +19,7 @@
     <%= f.text_field :description %><br />
 
     <%= f.label :pointVal %>
-    <%= f.text_field :pointVal %><br />
+    <%= f.select(:pointVal, (1..10) , {prompt: 'Select Point Value'}) %><br />
 
     <%= f.label :stage %>
     <%= f.select('stage', Story::STAGE_OPTIONS , {prompt: 'Select a stage'}) %>
