@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+
+  # Set a session value
+  session[:user_id] = @user.id
+  session[:user_role] = @user.role
+
+
   # GET /users
   # GET /users.json
   def index
