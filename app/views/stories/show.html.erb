@@ -18,6 +18,19 @@
   <%= @story.stage %>
 </p>
 
+<p><b>Developers:</b><br>
+<% if @users and @users.size > 0 %>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+        </tr>
+    <% end %>
+<% else %>
+    <tr><td>None</td></tr>
+<% end %>
+</p>
 
-<%= link_to 'Edit', edit_story_path(@story) %>
+<% if admin? == false %>
+    <%= link_to 'Edit', edit_story_path(@story) %>
+<% end %>
 <%= link_to 'Back', stories_path %>

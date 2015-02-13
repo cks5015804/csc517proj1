@@ -1,25 +1,45 @@
 <p id="notice"><%= notice %></p>
-<h1>Listing stories</h1>
 
+<% if admin? %>
+    <h1>Listing all stories</h1>
+<% else %>
+    <h1>
+      <% if @project%>
+          Listing stories for project:<%= @project.title %>
+      <% else %>
+          You haven't been assigned for any project
+      <% end %>
+    </h1>
+<% end %>
+
+
+<% if @stories and @stories.size > 0 %>
 <table>
   <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Title</th>
+    <th colspan="4">Actions</th>
   </tr>
 
 <% @stories.each do |story| %>
   <tr>
     <td><%= story.title %></td>
     <td><%= link_to 'Show', story_path(story) %></td>
-    <td><%= link_to 'Edit', edit_story_path(story) %></td>
-    <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <td><%= link_to 'Sign up', sign_story_path(story) %></td>
+
+    <% if admin? == false %>
+        <td><%= link_to 'Edit', edit_story_path(story) %></td>
+        <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Sign up', sign_story_path(story) %></td>
+    <% end %>
+
   </tr>
 <% end %>
-</table>
+  </table>
+<% end %>
 
-<br />
+<% if admin? == false %>
+  <p><%= link_to 'New Story', new_story_path %></p>
+<% end %>
 
-<%= link_to 'New Story', new_story_path %>
+
+
+

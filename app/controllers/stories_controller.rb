@@ -4,7 +4,19 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.all
+    if logged_in? and admin?
+      @stories = Story.all
+    elsif logged_in?
+      @user = current_user
+      if @user.project_id
+        #@stories = Story.find([@user.story_id, @user.story_id])
+        @stories = Story.where("project_id == '#{@user.project_id}'")
+        @project = Project.find(@user.project_id)
+      end
+    else
+      @stories = []
+    end
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +28,7 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.find(params[:id])
+    @users = User.where("story_id == '#{@story.id}'")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,6 +56,11 @@ class StoriesController < ApplicationController
   # POST /stories.json
   def create
     @story = Story.new(story_params)
+
+    #set story's foreign key: project_id
+    @user = current_user
+    @project = Project.find(@user.project_id)
+    @story.project_id = @project.id
 
     respond_to do |format|
       if @story.save

@@ -11,24 +11,27 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% if @users and @users.size > 0 %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Show', user %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
-        <td><%= link_to 'Assign Project', show_sign_project_path(user) %></td>
+            <td><%= link_to 'Assign Project', show_sign_project_path(user) %></td>
 
-        <td align="center"><% if(user.project_id.nil? == false)
-                 concat Project.find(user.project_id).title
-               else
-                 concat 'N/A'
-               end
-        %></td>
-
-      </tr>
-    <% end %>
+            <td align="center"><% if(user.project_id.nil? == false)
+                     concat Project.find(user.project_id).title
+                   else
+                     concat 'N/A'
+                   end
+            %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr><td>None</td></tr>
+      <% end %>
   </tbody>
 </table>
 
