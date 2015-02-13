@@ -6,6 +6,8 @@ class CreateStories < ActiveRecord::Migration
       t.integer :pointVal
       t.string :stage
 
+      t.integer :project_id
+
       t.timestamps
 
     end

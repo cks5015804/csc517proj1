@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   belongs_to :project, inverse_of: :users, :class_name => "Project", :foreign_key => "project_id"
   belongs_to :story, inverse_of: :users, :class_name => "Story", :foreign_key => "story_id"
 
+  validates :name, :presence => true
   validates :email, :presence => true
   validates :password, :presence => true
   validates :role, :presence => true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212070624) do
+ActiveRecord::Schema.define(version: 20150213042436) do
 
   create_table "models", force: true do |t|
     t.datetime "created_at"
@@ -23,12 +23,7 @@ ActiveRecord::Schema.define(version: 20150212070624) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "story_id"
   end
-
-  add_index "projects", ["story_id"], name: "index_projects_on_story_id"
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "stories", force: true do |t|
     t.string   "title"
@@ -37,24 +32,20 @@ ActiveRecord::Schema.define(version: 20150212070624) do
     t.string   "stage"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.integer  "project_id"
   end
 
   add_index "stories", ["project_id"], name: "index_stories_on_project_id"
-  add_index "stories", ["user_id"], name: "index_stories_on_user_id"
 
   create_table "users", force: true do |t|
+    t.string   "name"
     t.string   "email"
     t.string   "password"
     t.string   "role"
+    t.integer  "project_id"
+    t.integer  "story_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "story_id"
-    t.integer  "project_id"
   end
-
-  add_index "users", ["project_id"], name: "index_users_on_project_id"
-  add_index "users", ["story_id"], name: "index_users_on_story_id"
 
 end

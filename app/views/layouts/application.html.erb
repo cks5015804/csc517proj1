@@ -8,11 +8,11 @@
 </head>
 <body>
 <% if logged_in? %>
-    <%= 'Logged in as '+ current_user.email %>
+    <%= 'Logged in as '+ current_user.name %>
     <%= link_to 'Change Password',password_change_path %>
     <%= link_to 'Logout',logout_path, method: :delete %>
 <% else %>
-    <%= link_to 'Log-in', login_path %>
+    <%= link_to 'Login', login_path %>
 <% end %>
 
 
