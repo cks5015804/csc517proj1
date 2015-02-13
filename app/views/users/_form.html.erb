@@ -1,32 +1,55 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-<% end %>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-  <div class="field">
+    <div class="field">
 
-    <%= f.label :name %>
-    <%= f.text_field :name %><br />
-
-      <%= f.label :email %>
-      <%= f.text_field :email %><br />
-
-      <%= f.label :password %>
-      <%= f.text_field :password %><br />
-
-      <%= f.label :role %>
-      <%= f.select( :role, User::USER_ROLES, {prompt: 'Select a role'}) %><br><br>
+      <table cellspacing="8">
+        <tr>
+          <td>
+            <%= f.label :name %>
+          </td>
+          <td>
+            <%= f.text_field :name %><br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label :email %>
+          </td>
+          <td>
+            <%= f.text_field :email %><br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label :password %>
+          </td>
+          <td>
+            <%= f.text_field :password %><br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.label :role %>
+          </td>
+          <td>
+            <%= f.select( :role, User::USER_ROLES, {prompt: 'Select a role'}) %><br>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <div class="actions">
-        <%= f.submit %>
+      <%= f.submit %>
     </div>
 <% end %>

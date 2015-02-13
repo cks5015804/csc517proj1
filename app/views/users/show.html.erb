@@ -1,9 +1,30 @@
 <p>
-  <b>E-mail:</b>
-  <%= @user.email %><br>
-  <b>Role:</b>
-  <%= @user.role %><br>
-
+<table cellspacing="6">
+  <tr>
+    <td>
+      <b>Name:</b>
+    </td>
+    <td>
+      <%= @user.name %><br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>E-mail:</b>
+    </td>
+    <td>
+      <%= @user.email %><br>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Role:</b>
+    </td>
+    <td>
+      <%= @user.role %><br>
+    </td>
+  </tr>
+</table>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
