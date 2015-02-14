@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
-    delete    'logout'  => 'sessions#destroy'
+    get    'logout'  => 'sessions#destroy'
     get    'password_change' => 'sessions#password'
     post   'password_change' => 'sessions#password_change'
   end
