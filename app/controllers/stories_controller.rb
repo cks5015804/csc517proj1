@@ -28,7 +28,7 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.find(params[:id])
-    @users = User.where("story_id == '#{@story.id}'")
+    @users = User.where("story_id = '#{@story.id}'")
 
     respond_to do |format|
       format.html # show.html.erb
