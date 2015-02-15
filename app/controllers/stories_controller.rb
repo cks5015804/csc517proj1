@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
       @user = current_user
       if @user.project_id
         #@stories = Story.find([@user.story_id, @user.story_id])
-        @stories = Story.where("project_id == '#{@user.project_id}'")
+        @stories = Story.where("project_id = '#{@user.project_id}'")
         @project = Project.find(@user.project_id)
       end
     else
