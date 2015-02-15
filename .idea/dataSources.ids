@@ -1722,6 +1722,8 @@
       <column name="email" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="password" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="role" sqlType="varchar" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="project_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="story_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="created_at" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="timestamp" precision="29" scale="6" nullable="true" jdbcType="93"/>
       <primary-key name="users_pkey" columns="id"/>

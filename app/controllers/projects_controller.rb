@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @stories = Story.where("project_id == '#{@project.id}'")
+    @stories = Story.where("project_id = '#{@project.id}'")
   end
 
   # GET /projects/new
