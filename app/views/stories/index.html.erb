@@ -16,7 +16,12 @@
   <% if @stories.size > 0 %>
     <tr>
       <th>Title</th>
-      <th colspan="4">Actions</th>
+      <% if admin? == false %>
+          <th colspan="4">Actions</th>
+      <% else %>
+          <th colspan="1">Actions</th>
+      <% end %>
+      <th>Project</th>
     </tr>
     <% @stories.each do |story| %>
       <tr>
@@ -26,8 +31,22 @@
         <% if admin? == false %>
             <td><%= link_to 'Edit', edit_story_path(story) %></td>
             <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <td><%= link_to 'Sign up', sign_story_path(story) %></td>
+
+            <% if story.id == current_user.story_id %>
+              <td style="font-style: italic">Signed</td>
+            <% else %>
+              <td><%= link_to 'Sign up', sign_story_path(story) %></td>
+            <% end %>
+
         <% end %>
+
+        <td>
+          <% if story.project_id and Project.find(story.project_id) %>
+            <%= Project.find(story.project_id).title %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
 
       </tr>
     <% end %>
