@@ -12,29 +12,48 @@
     </h1>
 <% end %>
 
-
-<% if @stories and @stories.size > 0 %>
 <table>
-  <tr>
-    <th>Title</th>
-    <th colspan="4">Actions</th>
-  </tr>
+  <% if @stories.size > 0 %>
+    <tr>
+      <th>Title</th>
+      <% if admin? == false %>
+          <th colspan="4">Actions</th>
+      <% else %>
+          <th colspan="1">Actions</th>
+      <% end %>
+      <th>Project</th>
+    </tr>
+    <% @stories.each do |story| %>
+      <tr>
+        <td><%= story.title %></td>
+        <td><%= link_to 'Show', story_path(story) %></td>
 
-<% @stories.each do |story| %>
-  <tr>
-    <td><%= story.title %></td>
-    <td><%= link_to 'Show', story_path(story) %></td>
+        <% if admin? == false %>
+            <td><%= link_to 'Edit', edit_story_path(story) %></td>
+            <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
-    <% if admin? == false %>
-        <td><%= link_to 'Edit', edit_story_path(story) %></td>
-        <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Sign up', sign_story_path(story) %></td>
+            <% if story.id == current_user.story_id %>
+              <td style="font-style: italic">Signed</td>
+            <% else %>
+              <td><%= link_to 'Sign up', sign_story_path(story) %></td>
+            <% end %>
+
+        <% end %>
+
+        <td>
+          <% if story.project_id and Project.find(story.project_id) %>
+            <%= Project.find(story.project_id).title %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
+
+      </tr>
     <% end %>
-
-  </tr>
-<% end %>
-  </table>
-<% end %>
+  <% else %>
+    <tr><td>No stories available.</td></tr>
+  <% end %>
+</table>
 
 <% if admin? == false %>
   <p><%= link_to 'New Story', new_story_path %></p>
