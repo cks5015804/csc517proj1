@@ -21,5 +21,11 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: db/production
+  username: postgres # replace this with your own user name
+  password: admin # replace this with your own password
+  host: localhost
+  encoding: UTF8
+  pool: 5
+  timeout: 5000
