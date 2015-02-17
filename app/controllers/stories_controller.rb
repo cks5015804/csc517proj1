@@ -105,7 +105,18 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @user = current_user
 
+
+    logger.info "Number of devs #{@user.number_of_devs_in_story(params)}"
+
+    # if story has 2 developers, unsign one
+    if @user.number_of_devs_in_story(params) > 1
+      @user_remove = User.where(:story_id => params[:id]).first
+      @user_remove.update_attributes!(:story_id => nil)
+    end
+
+    # add story id to current user
     @user.update_attributes!(:story_id => @story.id)
+
 
     respond_to do |format|
       format.html { redirect_to stories_path, notice: 'Story was successfully signed or switched.' }
