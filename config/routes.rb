@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
-    get    'logout'  => 'sessions#destroy'
+    get 'logout'  => 'sessions#destroy'
     get    'password_change' => 'sessions#password'
-    post   'password_change' => 'sessions#password_change'
+    post    'password_change' => 'sessions#password_change'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

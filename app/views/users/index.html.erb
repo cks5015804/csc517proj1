@@ -17,8 +17,12 @@
             <td><%= user.email %></td>
             <td><%= link_to 'Show', user %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>
-            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
+            <% if user.role != User::USER_ROLES[0] %>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% else %>
+            <td></td>
+            <% end %>
             <td><%= link_to 'Assign Project', show_sign_project_path(user) %></td>
 
             <td align="center"><% if(user.project_id.nil? == false)

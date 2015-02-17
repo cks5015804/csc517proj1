@@ -10,7 +10,7 @@
 <% if logged_in? %>
     <%= 'Logged in as '+ current_user.name %>
     <%= link_to 'Change Password',password_change_path %>
-    <%= link_to 'Logout',logout_path %>
+    <%= link_to 'Logout',logout_path%>
 <% else %>
     <%= link_to 'Login', login_path %>
 <% end %>
