@@ -4,19 +4,24 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    if logged_in? and admin?
-      @stories = Story.all
-    elsif logged_in?
+    if logged_in?
       @user = current_user
+
+      if params[:keyword]
+        @stories = Story.search(params[:keyword])
+      elsif admin?
+        @stories = Story.all
+      elsif
+        @stories = Story.where("project_id = '#{@user.project_id}'")
+      end
+
       if @user.project_id
-        #@stories = Story.find([@user.story_id, @user.story_id])
-        @stories = Story.where("project_id == '#{@user.project_id}'")
         @project = Project.find(@user.project_id)
       end
+
     else
       @stories = []
     end
-
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,7 +33,7 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.find(params[:id])
-    @users = User.where("story_id == '#{@story.id}'")
+    @users = User.where("story_id = '#{@story.id}'")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -122,6 +127,11 @@ class StoriesController < ApplicationController
       format.html { redirect_to stories_path, notice: 'Story was successfully signed or switched.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    puts 'In search method!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    @stories = Story.search(params[:keyword])
   end
 
   def story_params

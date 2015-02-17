@@ -13,7 +13,7 @@
 <% end %>
 
 <table>
-  <% if @stories.size > 0 %>
+  <% if @stories and @stories.size > 0 %>
     <tr>
       <th>Title</th>
       <% if admin? == false %>
@@ -51,12 +51,19 @@
       </tr>
     <% end %>
   <% else %>
-    <tr><td>No stories available.</td></tr>
+    <tr><td>No stories found.</td></tr>
   <% end %>
 </table>
 
 <% if admin? == false %>
   <p><%= link_to 'New Story', new_story_path %></p>
+<% end %>
+
+<%= form_tag stories_path, :method => 'get', params[:keyword] => '' do %>
+    <p>
+      <%= text_field_tag :keyword %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
 <% end %>
 
 

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   get 'stories/:id/sign' => 'stories#sign', as: :sign_story
+  get 'stories/search/:keyword' => 'stories#search', as: :search_stories
+
   get 'projects/:id/sign' => 'projects#show_sign', as: :show_sign_project
   post 'project/sign' => 'projects#sign', as: :sign_project
 
