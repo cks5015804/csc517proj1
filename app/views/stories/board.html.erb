@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<% if admin? %>
+    <h1>Showing Storyboard</h1>
+<% else %>
+    <h1>
+      <% if @projects.size == 0 %>
+          You haven't been assigned for any project
+      <% end %>
+    </h1>
+<% end %>

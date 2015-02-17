@@ -118,9 +118,39 @@ class StoriesController < ApplicationController
     end
   end
 
-  def search
-    puts 'In search method!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-    @stories = Story.search(params[:keyword])
+  # can't route to this, deprecated
+  #def search
+   # puts 'In search method!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+   # @stories = Story.search(params[:keyword])
+  #end
+
+  def board
+    if logged_in?
+      @user = current_user
+      @projects = []
+      @storiesList = []
+
+      if admin?
+        @projects = Project.all
+      else
+        @projects << Project.find(@user.project_id)
+      end
+
+      @projects.each do |project|
+        @stories = Story.where("project_id = '#{project.id}'")
+        @storiesList.push(@stories[0])
+      end
+
+      puts @storiesList.size
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @stories }
+      end
+
+    else
+      redirect_to login_path
+    end
   end
 
   def story_params
