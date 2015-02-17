@@ -14,4 +14,13 @@ class Story < ActiveRecord::Base
   validates :pointVal, :presence => true
   validates :stage, :presence => true
 
+  def self.search(keyword)
+    if keyword
+      #find(:all, :conditions => ['title LIKE ?', "%#{keyword}%"])
+      where("title like ? OR description like ?", "%#{keyword}%", "%#{keyword}%")
+    else
+      find(:all)
+    end
+  end
+
 end
