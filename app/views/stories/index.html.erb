@@ -12,29 +12,29 @@
     </h1>
 <% end %>
 
+
+<% if @stories and @stories.size > 0 %>
 <table>
-  <% if @stories.size > 0 %>
-    <tr>
-      <th>Title</th>
-      <th colspan="4">Actions</th>
-    </tr>
-    <% @stories.each do |story| %>
-      <tr>
-        <td><%= story.title %></td>
-        <td><%= link_to 'Show', story_path(story) %></td>
+  <tr>
+    <th>Title</th>
+    <th colspan="4">Actions</th>
+  </tr>
 
-        <% if admin? == false %>
-            <td><%= link_to 'Edit', edit_story_path(story) %></td>
-            <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <td><%= link_to 'Sign up', sign_story_path(story) %></td>
-        <% end %>
+<% @stories.each do |story| %>
+  <tr>
+    <td><%= story.title %></td>
+    <td><%= link_to 'Show', story_path(story) %></td>
 
-      </tr>
+    <% if admin? == false %>
+        <td><%= link_to 'Edit', edit_story_path(story) %></td>
+        <td><%= link_to 'Destroy', story_path(story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Sign up', sign_story_path(story) %></td>
     <% end %>
-  <% else %>
-    <tr><td>No stories available.</td></tr>
-  <% end %>
-</table>
+
+  </tr>
+<% end %>
+  </table>
+<% end %>
 
 <% if admin? == false %>
   <p><%= link_to 'New Story', new_story_path %></p>

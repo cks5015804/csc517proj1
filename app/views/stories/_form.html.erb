@@ -1,35 +1,33 @@
 <%= form_for(@story) do |f| %>
-    <% if @story.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
+  <% if @story.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
 
-          <ul>
-            <% @story.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <table>
-        <tr><td>
-          <%= f.label :title %></td>
-          <td><%= f.text_field :title %></td></tr>
-        <tr><td>
-          <%= f.label :description %></td>
-          <td><%= f.text_field :description %></td></tr>
-        <tr><td>
-          <%= f.label :pointVal %></td>
-          <td><%= f.select(:pointVal, (1..10) , {prompt: 'Select Point Value'}) %></td></tr>
-        <tr><td>
-          <%= f.label :stage %></td>
-          <td><%= f.select('stage', Story::STAGE_OPTIONS , {prompt: 'Select a stage'}) %></td></tr>
-      </table>
-
-
+      <ul>
+      <% @story.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
     </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %><br />
+
+    <%= f.label :description %>
+    <%= f.text_field :description %><br />
+
+    <%= f.label :pointVal %>
+    <%= f.select(:pointVal, (1..10) , {prompt: 'Select Point Value'}) %><br />
+
+    <%= f.label :stage %>
+    <%= f.select('stage', Story::STAGE_OPTIONS , {prompt: 'Select a stage'}) %>
+
+
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
