@@ -88,7 +88,14 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     @user = User.find(params[:user_id])
 
+    # remove from stories in a different project
+    if @user.project_id != @project.id
+      @user.update_attributes!(:story_id => nil)
+    end
+
+    # change project of user
     @user.update_attributes!(:project_id => @project.id)
+
 
     respond_to do |format|
       format.html { redirect_to users_path, notice: 'Project was successfully signed for user.' }
