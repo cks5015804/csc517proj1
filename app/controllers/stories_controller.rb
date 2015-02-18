@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+  before_action :require_login
   include SessionsHelper
 
   # GET /stories
@@ -182,6 +183,14 @@ class StoriesController < ApplicationController
 
   def story_params
     params.require(:story).permit(:title, :description, :pointVal, :stage)
+  end
+
+  private
+
+  def require_login
+    unless logged_in?
+      redirect_to login_url # halts request cycle
+    end
   end
 
 
