@@ -1,34 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
   <title>StoryBoard</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link href="/assets/style.css.scss" rel="stylesheet" type="text/css">
+
 </head>
+
 <body>
-<% if logged_in? %>
-    <%= 'Logged in as '+ current_user.name %>
-    <%= link_to 'Change Password',password_change_path %>
-    <%= link_to 'Logout',logout_path%>
-<% else %>
-    <%= link_to 'Login', login_path %>
-<% end %>
+<div class="wrap ">
+  <div class="menu" style="position: relative" >
+    <div class="inner">
+      <p class="subNavBtn2">Storyboard</p>
 
-
-<h2>Storyboards</h2>
-
-<%= yield %>
-
-<br><br>
-
-<% if logged_in? %>
-    <% if admin? %>
-        <%= link_to 'Users', users_path %>
-    <% end %>
-    <%= link_to 'Projects', projects_path %>
-    <%= link_to 'Stories', stories_path %>
-    <%= link_to 'StoryBoard', storyboard_path %>
-<% end %>
+      <% if logged_in? %>
+          <p class="subNavBtn3">
+            <%= 'Logged in as '+ current_user.name %></br>
+            <%= link_to 'Change Password',password_change_path, :class => "subNavBtn4"%>
+            <%= link_to 'Logout',logout_path, :class => "subNavBtn4"%>
+          </p>
+      <% else %>
+          <a href="/login" class="subNavBtn">Login</a>
+      <% end %>
+      <% if logged_in? %>
+          <a href="/storyboard" class="subNavBtn">Storyboard</a>
+          <% if admin? %>
+              <a href="/users" class="subNavBtn">Users</a>
+          <% end %>
+          <a href="/projects" class="subNavBtn">projects</a>
+          <a href="/stories" class="subNavBtn">Stories</a>
+      <% end %>
+    </div>
+  </div>
+  <div class="wrap">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>
