@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def number_of_devs_in_story(id)
-    users = User.where(:story_id => id[:id])
+    users = User.where(:story_id => id)
     if users
       users.size
     else

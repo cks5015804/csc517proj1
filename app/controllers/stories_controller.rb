@@ -111,10 +111,10 @@ class StoriesController < ApplicationController
     @user = current_user
 
 
-    logger.info "Number of devs #{@user.number_of_devs_in_story(params)}"
+    logger.info "Number of devs #{@user.number_of_devs_in_story(params[:id])}"
 
     # if story has 2 developers, unsign one
-    if @user.number_of_devs_in_story(params) > 1
+    if @user.number_of_devs_in_story(params[:id]) > 1
       @user_remove = User.where(:story_id => params[:id]).first
       @user_remove.update_attributes!(:story_id => nil)
     end
