@@ -22,4 +22,14 @@ class User < ActiveRecord::Base
     return nil
   end
 
+  def number_of_devs_in_story(id)
+    users = User.where(:story_id => id)
+    if users
+      users.size
+    else
+      0
+    end
+
+  end
+
 end
