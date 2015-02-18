@@ -4,7 +4,7 @@
     <h1>Listing all stories</h1>
 <% else %>
     <h1>
-      <% if @project%>
+      <% if @project %>
           Listing stories for project:<%= @project.title %>
       <% else %>
           You haven't been assigned for any project
@@ -50,22 +50,23 @@
 
       </tr>
     <% end %>
-  <% else %>
+  <% elsif @project %>
     <tr><td>No stories found.</td></tr>
   <% end %>
 </table>
 
-<% if admin? == false %>
+<% if @project and admin? == false %>
   <p><%= link_to 'New Story', new_story_path %></p>
 <% end %>
 
-<%= form_tag stories_path, :method => 'get', params[:keyword] => '' do %>
-    <p>
-      <%= text_field_tag :keyword %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
+<% if @project %>
+    <%= form_tag stories_path, :method => 'get', params[:keyword] => '' do %>
+        <p>
+          <%= text_field_tag :keyword %>
+          <%= submit_tag "Search", :name => nil %>
+        </p>
+    <% end %>
 <% end %>
-
 
 
 

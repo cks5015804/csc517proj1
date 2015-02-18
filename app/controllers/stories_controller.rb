@@ -144,7 +144,7 @@ class StoriesController < ApplicationController
 
       if admin?
         @projects = Project.all
-      else
+      elsif @user.project_id
         @projects << Project.find(@user.project_id)
       end
 
