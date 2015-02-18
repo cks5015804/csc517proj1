@@ -2,10 +2,28 @@
 
 <% if admin? %>
     <h1>Showing Storyboard</h1>
-<% else %>
-    <h1>
-      <% if @projects.size == 0 %>
-          You haven't been assigned for any project
-      <% end %>
-    </h1>
+<% elsif @projects.size == 0 %>
+    <h1>You haven't been assigned for any project</h1>
+<% end %>
+
+<% @projects.each_with_index do |project, i| %>
+<table>
+  <th colspan="2"><h2><%= project.title %></h2></th>
+  <% Story::STAGE_OPTIONS.each_with_index do |stage, j| %>
+    <% if j < 5%>
+        <tr>
+          <td style="font-weight: bolder">+ <%= stage[0] %></td>
+          <td>Total score: <%= @scoresList[i][j] %></td>
+        </tr>
+        <% @storiesList[i].each do |story|%>
+          <% if story.stage == stage[0] %>
+              <tr>
+                <td>&nbsp;&nbsp;&nbsp;- <%= story.title %></td>
+                <td>score: <%= story.pointVal%></td>
+              </tr>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
+</table>
 <% end %>

@@ -16,14 +16,20 @@
           <tr>
             <td><%= user.email %></td>
             <td><%= link_to 'Show', user %></td>
-            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+
+            <td>
+                <% if user.email != 'admin@ncsu.edu'%>
+                      <%= link_to 'Edit', edit_user_path(user) %>
+                <% end %>
+            </td>
 
             <% if user.role != User::USER_ROLES[0] %>
-            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'Assign Project', show_sign_project_path(user) %></td>
             <% else %>
-            <td></td>
+                <td></td>
+                <td></td>
             <% end %>
-            <td><%= link_to 'Assign Project', show_sign_project_path(user) %></td>
 
             <td align="center"><% if(user.project_id.nil? == false)
                      concat Project.find(user.project_id).title

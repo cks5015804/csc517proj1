@@ -147,12 +147,28 @@ class StoriesController < ApplicationController
         @projects << Project.find(@user.project_id)
       end
 
-      @projects.each do |project|
-        @stories = Story.where("project_id = '#{project.id}'")
-        @storiesList.push(@stories[0])
+      @storiesList = Array.new(@projects.size) { Array.new }
+      @scoresList = Array.new(@projects.size) { Array.new(6,0) }
+
+      print @scoresList
+
+      @projects.each_with_index do |project, index|
+        @storiesList[index] = Story.where("project_id = '#{project.id}'")
       end
 
-      puts @storiesList.size
+      @storiesList.each_with_index do |stories, index|
+        if stories.size > 0
+          stories.each do |story|
+            i = 0
+            if story.stage
+              i = Story::STAGE_OPTIONS.index(story.stage)
+            end
+            @scoresList[index][i.to_i] += story.pointVal.to_i
+          end
+        end
+      end
+
+      print @scoresList
 
       respond_to do |format|
         format.html # index.html.erb
