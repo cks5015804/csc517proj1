@@ -7,19 +7,14 @@ class StoriesController < ApplicationController
   def index
     if logged_in?
       @user = current_user
-
       if params[:keyword]
         @stories = Story.search(params[:keyword])
       elsif admin?
         @stories = Story.all
-      elsif
+      elsif @user.project_id
         @stories = Story.where("project_id = '#{@user.project_id}'")
-      end
-
-      if @user.project_id
         @project = Project.find(@user.project_id)
       end
-
     else
       @stories = []
     end
@@ -34,7 +29,7 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.find(params[:id])
-    @users = User.where("story_id = '#{@story.id}'")
+    @users = User.where("story_id = #{@story.id}")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -151,8 +146,6 @@ class StoriesController < ApplicationController
       @storiesList = Array.new(@projects.size) { Array.new }
       @scoresList = Array.new(@projects.size) { Array.new(6,0) }
 
-      print @scoresList
-
       @projects.each_with_index do |project, index|
         @storiesList[index] = Story.where("project_id = '#{project.id}'")
       end
@@ -168,8 +161,6 @@ class StoriesController < ApplicationController
           end
         end
       end
-
-      print @scoresList
 
       respond_to do |format|
         format.html # index.html.erb

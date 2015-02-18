@@ -50,7 +50,7 @@
 
       </tr>
     <% end %>
-  <% elsif @project %>
+  <% elsif @stories and @stories.size == 0 and (admin? or @project) %>
     <tr><td>No stories found.</td></tr>
   <% end %>
 </table>
@@ -59,7 +59,7 @@
   <p><%= link_to 'New Story', new_story_path %></p>
 <% end %>
 
-<% if @project %>
+<% if admin? or @project %>
     <%= form_tag stories_path, :method => 'get', params[:keyword] => '' do %>
         <p>
           <%= text_field_tag :keyword %>

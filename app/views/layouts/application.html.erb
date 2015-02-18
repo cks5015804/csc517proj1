@@ -18,20 +18,23 @@
 
       <% if logged_in? %>
           <p class="subNavBtn3">
-            <%= 'Logged in as '+ current_user.name %></br>
-            <%= link_to 'Change Password',password_change_path, :class => "subNavBtn4"%>
+            <%= 'Logged in as '+ current_user.name %>
+            <% if current_user.name != 'Administrator'%>
+                </br><%= link_to 'Change Password',password_change_path, :class => "subNavBtn4"%>
+            <% end %>
             <%= link_to 'Logout',logout_path, :class => "subNavBtn4"%>
           </p>
       <% else %>
           <a href="/login" class="subNavBtn">Login</a>
       <% end %>
       <% if logged_in? %>
-          <a href="/storyboard" class="subNavBtn">Storyboard</a>
           <% if admin? %>
               <a href="/users" class="subNavBtn">Users</a>
           <% end %>
-          <a href="/projects" class="subNavBtn">projects</a>
+          <a href="/storyboard" class="subNavBtn">Storyboard</a>
           <a href="/stories" class="subNavBtn">Stories</a>
+          <a href="/projects" class="subNavBtn">Projects</a>
+
       <% end %>
     </div>
   </div>
