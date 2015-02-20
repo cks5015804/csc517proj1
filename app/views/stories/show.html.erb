@@ -1,34 +1,43 @@
-<p>
-  <b>Name:</b>
-  <%= @story.title %>
-</p>
+<br>
+<table>
+  <th colspan="2"><b>Story Detail</b></th>
 
-<p>
-  <b>Description:</b>
-  <%= @story.description %>
-</p>
+  <tr>
+    <td><b>Title:</b></td>
+    <td><%= @story.title %></td>
+  </tr>
 
-<p>
-  <b>Point Value:</b>
-  <%= @story.pointVal %>
-</p>
+  <tr>
+    <td><b>Description:</b></td>
+    <td><%= @story.description %></td>
+  </tr>
 
-<p>
-  <b>Stage:</b>
-  <%= @story.stage %>
-</p>
+  <tr>
+    <td><b>Point Value:</b></td>
+    <td><%= @story.pointVal %></td>
+  </tr>
 
-<p><b>Developers:</b><br>
-<% if @users and @users.size > 0 %>
-    <% @users.each do |user| %>
-        <tr>
-          <td><%= user.email %></td>
-        </tr>
-    <% end %>
-<% else %>
-    <tr><td>None</td></tr>
-<% end %>
-</p>
+  <tr>
+    <td><b>Stage:</b></td>
+    <td><%= @story.stage %></td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <th colspan="2"><b>Developers:</b></th>
+  <% if @users and @users.size > 0 %>
+      <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Show', user %></td>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr><td>None</td></tr>
+  <% end %>
+</table>
 
 <% if admin? == false %>
     <%= link_to 'Edit', edit_story_path(@story) %>

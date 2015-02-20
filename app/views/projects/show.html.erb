@@ -1,34 +1,50 @@
+<br>
+<table>
+  <th colspan="2"><b>Project Detail</b></th>
 
-<p>
-  <b>Title:</b>
-  <%= @project.title %><br><br>
-  <b>Description:</b><br>
-  <%= @project.description %><br><br>
+  <tr>
+    <td><b>Title:</b></td>
+    <td><%= @project.title %></td>
+  </tr>
 
-  <b>Stories:</b><br>
+  <tr>
+    <td><b>Description:</b></td>
+    <td><%= @project.description %></td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <th colspan="2"><b>Stories:</b></th>
   <% if @stories and @stories.size > 0 %>
       <% @stories.each do |story| %>
           <tr>
             <td><%= story.title %></td>
-            <td><%= link_to 'Show', story %></td><br>
+            <td><%= link_to 'Show', story %></td>
           </tr>
       <% end %>
   <% else %>
       <tr><td>None</td></tr>
   <% end %>
-</p>
+</table>
 
-<p><b>Developers:</b><br>
+<br>
+
+<table>
+  <th colspan="2"><b>Developers:</b></th>
   <% if @users and @users.size > 0 %>
       <% @users.each do |user| %>
           <tr>
             <td><%= user.email %></td>
+            <td><%= link_to 'Show', user %></td>
           </tr>
       <% end %>
   <% else %>
       <tr><td>None</td></tr>
   <% end %>
-</p>
+</table>
+
 
 <% if admin? %>
     <%= link_to 'Edit', edit_project_path(@project) %> |
