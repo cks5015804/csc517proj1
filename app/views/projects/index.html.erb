@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <% if logged_in? and admin? %>
     <h1>Listing all projects</h1>
 <% elsif @projects.nil? or @projects.size == 0 %>
@@ -7,8 +8,9 @@
 <% else %>
     <h1>Listing your projects</h1>
 <% end %>
-
-<table>
+<center>
+<!--<table id="mytable" cellspacing="0">-->
+  <table cellspacing="0">
   <% if @projects and @projects.size > 0 %>
       <thead>
       <tr>
@@ -35,4 +37,4 @@
 <% if logged_in? and admin? %>
     <%= link_to 'New Project', new_project_path %>
 <% end %>
-
+</center>

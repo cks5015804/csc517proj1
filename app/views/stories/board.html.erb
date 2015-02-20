@@ -7,23 +7,24 @@
 <% end %>
 
 <% @projects.each_with_index do |project, i| %>
-<table>
-  <th colspan="2"><h2><%= project.title %></h2></th>
+<table class="stbdwidth" cellspacing="0">
+  <th class="stbdheight" colspan="2"><%= project.title %></th>
   <% Story::STAGE_OPTIONS.each_with_index do |stage, j| %>
     <% if j < 5%>
         <tr>
           <td style="font-weight: bolder">+ <%= stage[0] %></td>
-          <td>Total score: <%= @scoresList[i][j] %></td>
+          <td>+ Total score: <%= @scoresList[i][j] %></td>
         </tr>
         <% @storiesList[i].each do |story|%>
           <% if story.stage == stage[0] %>
               <tr>
-                <td>&nbsp;&nbsp;&nbsp;- <%= story.title %></td>
-                <td>score: <%= story.pointVal%></td>
+                <td >&nbsp;&nbsp;&nbsp;- <%= story.title %></td>
+                <td >&nbsp;&nbsp;&nbsp;- score: <%= story.pointVal%></td>
               </tr>
           <% end %>
         <% end %>
     <% end %>
   <% end %>
+  </br>
 </table>
 <% end %>
