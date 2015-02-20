@@ -7,13 +7,16 @@ class StoriesController < ApplicationController
   def index
     if logged_in?
       @user = current_user
+      if @user.project_id
+        @project = Project.find(@user.project_id)
+      end
+
       if params[:keyword]
         @stories = Story.search(params[:keyword])
       elsif admin?
         @stories = Story.all
       elsif @user.project_id
         @stories = Story.where("project_id = '#{@user.project_id}'")
-        @project = Project.find(@user.project_id)
       end
     else
       @stories = []

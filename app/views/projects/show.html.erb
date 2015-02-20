@@ -16,8 +16,20 @@
   <% else %>
       <tr><td>None</td></tr>
   <% end %>
-
 </p>
+
+<p><b>Developers:</b><br>
+  <% if @users and @users.size > 0 %>
+      <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr><td>None</td></tr>
+  <% end %>
+</p>
+
 <% if admin? %>
     <%= link_to 'Edit', edit_project_path(@project) %> |
 <% end %>
