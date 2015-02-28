@@ -1,8 +1,10 @@
-CSC/ECE 517 Project 1
+#Story Board for Agile Projects
 
-StoryBoard
+The project is on the cloud! https://afternoon-caverns-9146.herokuapp.com
 
-Default Admin
-User Name: admin@ncsu.edu
-Password: pw
+This is a course project of CSC517 (Object-Oriented Design and Development). Using Ruby on Rails we created a website served as a Story Board for admins and developers to manage and track Stories. Stories are small tasks used to divide effort in agile projects.
 
+Main Features:
+* Admins have the authority to create users (developers) and projects, assign developers to projects and view all users, stories and projects.
+* Developers can create stories for the project they belong to and sign for one story.
+* A story have six different stages. The system provides a storyboard page to show all/current project(s) and their ongoing stories at different stages, as well as the developers belonged to them.
