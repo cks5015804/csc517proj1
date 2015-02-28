@@ -1,4 +1,4 @@
-#Story Board for Agile Projects
+# Story Board for Agile Projects
 
 The project is on the cloud! https://afternoon-caverns-9146.herokuapp.com
 
